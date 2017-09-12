@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 //@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @SpringBootTest
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc//等同于 RunWith  +  SpringBootTest
 public class ApplicationTest {
     //
     //@LocalServerPort

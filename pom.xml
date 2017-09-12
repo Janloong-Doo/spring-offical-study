@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>springboot-test-web</module>
+        <module>springmvc-test-web</module>
     </modules>
 
 
