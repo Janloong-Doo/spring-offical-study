@@ -51,8 +51,26 @@ public class LoongControoler1 {
 
     @RequestMapping("/test5")
     public @ResponseBody
-    User test5(User user) {
-        int insert = userService.insert(user);
-        return user;
+    String  test5(User user) {
+        //int insert = userService.insert(user);
+        userService.updateAndInsert(user);
+        return "transaction test";
+    }
+
+    @RequestMapping("/test6")
+    public @ResponseBody
+    String test6(User user) {
+        String id = "123";
+        String name = "janloong";
+        String age = "24";
+        String address = "china";
+        User user2 = new User();
+        user.setCardId(id);
+        user.setName(name);
+        user.setAge(age);
+        user.setAddress(address);
+        System.out.println("user : " + user.toString());
+        int insert = userService.insert(user2);
+        return "插入成功了";
     }
 }

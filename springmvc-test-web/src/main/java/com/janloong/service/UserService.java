@@ -13,4 +13,6 @@ public interface UserService {
     int insertList(List<User> pojos);
 
     int update(User pojo);
+
+    void updateAndInsert(User user);
 }

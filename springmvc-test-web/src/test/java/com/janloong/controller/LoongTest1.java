@@ -1,20 +1,27 @@
 package com.janloong.controller;
 
+import com.janloong.dao.UserDao;
 import com.janloong.domain.User;
 import com.janloong.service.LoongService1;
 import com.janloong.service.impl.LoongServiceImpl2;
 import com.janloong.service.impl.UserServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
@@ -30,11 +37,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @author Janloong
  * @create 2017-09-12 14:50
  **/
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(locations={"classpath:spring/applicationContext-*xml"})
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:spring/spring-*.xml"})
 //配置事务的回滚,对数据库的增删改都会回滚,便于测试用例的循环利用
 //@TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
-//@Transactional
+@Transactional
 //@WebAppConfiguration //测试环境使用，用来表示测试环境使用的ApplicationContext将是WebApplicationContext类型的；value指定web应用的根
 public class LoongTest1 {
 
@@ -47,6 +54,11 @@ public class LoongTest1 {
 
     @InjectMocks
     private LoongControoler1 loongControoler1;
+
+
+    @Autowired
+    private UserDao userDao;
+
 
     private MockMvc mockMvc;
 
@@ -129,7 +141,7 @@ public class LoongTest1 {
         String id = "123";
         String name = "janloong";
         String age = "24";
-        String address = "china";
+        String address = "china NO.1";
         User user = new User();
         user.setCardId(id);
         user.setName(name);
@@ -139,16 +151,41 @@ public class LoongTest1 {
         map.add("id", "123");
         map.add("name", "janloong");
         map.add("age", "24");
-        map.add("address", "address");
+        map.add("address", "china NO.1");
+
+        userDao.update(user);
+        //userDao.insert(user);
 
         when(userService.insert(user)).thenCallRealMethod();
 
-        this.mockMvc.perform(post("/test5")
+        String contentAsString = this.mockMvc.perform(post("/test6")
                 .params(map)
+                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
         )
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andReturn();
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+        String s = new String(contentAsString.getBytes("ISO-8859-1"), "UTF-8");
+        System.out.println("返回结果为 : " + s);
+
+    }
+
+    @Test
+    public void test6() throws Exception {
+        String id = "124";
+        String name = "janloong";
+        String age = "24";
+        String address = "china NO.1";
+        User user = new User();
+        user.setCardId(id);
+        user.setName(name);
+        user.setAge(age);
+        user.setAddress(address);
+        int insert = userDao.insert(user);
+        System.out.println("修改的数据为 : "+ insert);
+
     }
 
     //自定义注册对象的方法以及返回值
