@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 注入属性配置文件-->
+    <bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>classpath*:jdbc.properties</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreResourceNotFound" value="false"/>
+        <property name="properties" ref="configProperties"/>
+    </bean>
+
+    <!--数据源配置-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+        <property name="url" value="${jdbc.mysql.url}"/>
+        <property name="username" value="${jdbc.mysql.username}"/>
+        <property name="password" value="${jdbc.mysql.password}"/>
+        <property name="driverClassName" value="${jdbc.mysql.driverClassName}"/>
+        <property name="filters" value="stat"/>
+        <property name="maxActive" value="50"/>
+        <property name="initialSize" value="5"/>
+        <property name="maxWait" value="60000"/>
+        <property name="minIdle" value="5"/>
+        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+        <property name="minEvictableIdleTimeMillis" value="300000"/>
+        <property name="validationQuery" value="SELECT 'x' from dual"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+        <property name="removeAbandoned" value="true"/>
+        <!-- 打开removeAbandoned功能 -->
+        <property name="removeAbandonedTimeout" value="1800"/>
+        <!-- 1800秒，也就是30分钟 -->
+        <property name="logAbandoned" value="true"/>
+        <!-- 关闭abanded连接时输出错误日志 -->
+    </bean>
+
+</beans>

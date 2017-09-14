@@ -1,12 +1,15 @@
 package com.janloong.controller;
 
+import com.janloong.domain.User;
 import com.janloong.service.LoongService1;
 import com.janloong.service.LoongService2;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.janloong.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.annotation.Resource;
 
 /**
  * @author Janloong
@@ -15,10 +18,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class LoongControoler1 {
 
-    @Autowired
+    @Resource
     private LoongService1 loongService1;
-    @Autowired
+    @Resource
     private LoongService2 loongService2;
+    @Resource
+    private UserService userService;
 
     @RequestMapping("/test1")
     public @ResponseBody
@@ -42,5 +47,12 @@ public class LoongControoler1 {
     public @ResponseBody
     String test4(String msg) {
         return loongService2.test1(msg);
+    }
+
+    @RequestMapping("/test5")
+    public @ResponseBody
+    User test5(User user) {
+        int insert = userService.insert(user);
+        return user;
     }
 }
