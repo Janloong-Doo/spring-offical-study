@@ -17,13 +17,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -174,7 +177,7 @@ public class LoongTest1 {
 
     @Test
     public void test6() throws Exception {
-        String id = "124";
+        String id = "123";
         String name = "janloong";
         String age = "24";
         String address = "china NO.1";
@@ -183,8 +186,9 @@ public class LoongTest1 {
         user.setName(name);
         user.setAge(age);
         user.setAddress(address);
-        int insert = userDao.insert(user);
-        System.out.println("修改的数据为 : "+ insert);
+        //int insert = userDao.insert(user);
+        int insert = userDao.update(user);
+        System.out.println("修改的数据为 : " + insert);
 
     }
 
@@ -267,4 +271,24 @@ public class LoongTest1 {
         //}
     }
 
+
+    @Test
+    public void test7() throws Exception {
+        User user = new User();
+        user.setName("a");
+        List<User> list = new ArrayList<>();
+        list.add(user);
+
+        user.setName("b");
+        list.add(user);
+        user.setName("c");
+        list.add(user);
+
+        for (User u : list) {
+            String s = UUID.randomUUID().toString();
+            u.setCardId(s);
+            System.out.println("----------"+s);
+        }
+        System.out.println("u--"+list);
+    }
 }

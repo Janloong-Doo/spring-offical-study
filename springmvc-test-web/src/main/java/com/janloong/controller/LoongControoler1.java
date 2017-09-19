@@ -4,6 +4,9 @@ import com.janloong.domain.User;
 import com.janloong.service.LoongService1;
 import com.janloong.service.LoongService2;
 import com.janloong.service.UserService;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +20,8 @@ import javax.annotation.Resource;
  **/
 @Controller
 public class LoongControoler1 {
+
+    private static final Logger logger = LoggerFactory.getLogger(LoongControoler1.class);
 
     @Resource
     private LoongService1 loongService1;
@@ -51,8 +56,10 @@ public class LoongControoler1 {
 
     @RequestMapping("/test5")
     public @ResponseBody
-    String  test5(User user) {
+    String test5(User user) {
         //int insert = userService.insert(user);
+        logger.info("Logger info 打印成功吗");
+        logger.debug("Logger debug 打印成功吗");
         userService.updateAndInsert(user);
         return "transaction test";
     }
