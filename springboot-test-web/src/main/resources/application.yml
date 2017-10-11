@@ -5,6 +5,12 @@ spring:
     password: root
     driverClassName: com.mysql.cj.jdbc.Driver
 
+# springboot fileupload
+  http.multipart:
+    max-file-size: 128KB
+    max-request-size: 128KB
 
 logging:
   level: info
+
+
