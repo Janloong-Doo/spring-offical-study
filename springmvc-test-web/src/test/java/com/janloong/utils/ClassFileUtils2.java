@@ -20,7 +20,7 @@ public class ClassFileUtils2 {
 
             //设置class文件的位置
             //cPool.insertClassPath("D:\\Java\\eclipse\\newworkspace\\test\\bin");
-            cPool.insertClassPath("C:\\Users\\Administrator\\Desktop\\231");
+            cPool.insertClassPath( "C:\\Users\\Administrator\\Desktop\\231");
 
             //获取该class对象
             //CtClass cClass = cPool.get("com.lucumt.Test1");

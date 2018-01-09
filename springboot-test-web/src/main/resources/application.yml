@@ -9,8 +9,10 @@ spring:
   http.multipart:
     max-file-size: 128KB
     max-request-size: 128KB
+# thymeleaf config
+  thymeleaf:
+    check-template-location: true
 
 logging:
   level: info
-
-
+  path: /home/long/spring/logs

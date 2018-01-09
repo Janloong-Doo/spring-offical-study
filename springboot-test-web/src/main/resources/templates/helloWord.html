@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--<html  xmlns:th="http://www.thymeleaf.org">-->
+<head>
+    <meta charset="UTF-8"/>
+    <title>Hello,Janloong_Do_O</title>
+</head>
+<body>
+<div>
+    Hello , My Name Is Janloong_Do_O !
+</div>
+<span th:text="${date}"></span>
+<div>
+    <div>
+        <ul>
+            <li th:each="s:${num}">
+                <span th:text="${s}"></span>
+                <button th:onclick="'getName(\''+${s}+'\')'">大声告诉我</button>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!--/*@thymesVar id="user" type="com.janloong.domain.User"*/-->
+<div th:object="${user}">
+    <p><span th:text="*{name}"></span></p>
+    <p><span th:text="*{age}"></span></p>
+    <p><span th:text="*{address}"></span></p>
+</div>
+
+<div>
+    <span th:text="#{janloong.home(${user.name})}"></span>
+</div>
+<div>
+    <label>性别<span>&nbsp;Sex:</span></label>
+    <select th:field="${user.sex}" class="form-control" th:switch="${user.sex}"
+            data-required="true">
+        <option value="男" th:case="'男'" th:selected="selected">男</option>
+        <option value="女" th:case="'女'" th:selected="selected">女</option>
+        <option value="">请选择</option>
+        <option value="">2</option>
+    </select>
+
+    <p class="answer" th:text="${4 * -6 * -2 % 7}">123</p>
+
+</div>
+
+<div>
+    <label for="body">Message body:</label>
+    <textarea id="body" name="body" th:inline="text">
+Dear [[${customerName}]],
+
+it is our sincere pleasure to congratulate your in your birthday:
+    Happy birthday [[${customerName}]]!!!
+
+See you soon, [[${customerName}]].
+
+Regards,
+    The Thymeleaf team
+</textarea>
+</div>
+<script th:inline="javascript">
+
+    function getName(name) {
+        alert('这是' + name);
+    }
+</script>
+</body>
+</html>

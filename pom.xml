@@ -11,6 +11,7 @@
     <modules>
         <module>springboot-test-web</module>
         <module>springmvc-test-web</module>
+        <module>springboot</module>
     </modules>
 
 

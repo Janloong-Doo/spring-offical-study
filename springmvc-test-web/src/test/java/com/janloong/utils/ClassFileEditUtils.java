@@ -19,7 +19,7 @@ public class ClassFileEditUtils {
     public static void main(String[] args) throws Exception {
 
         //String filePath = "C:\\GenEntity.class";
-        String filePath = "C:\\Users\\Administrator\\Desktop\\231\\PaidValidator.class";
+        String filePath = "C:\\Users\\Administrator\\Desktop\\codehelper\\PPValidator.class";
         FileInputStream fis = new FileInputStream(filePath);
 
         DataInput di = new DataInputStream(fis);
@@ -35,11 +35,30 @@ public class ClassFileEditUtils {
                 System.out.print(infos[i].getVerbose());
                 System.out.print(" = ");
                 System.out.println(infos[i].getTagVerbose());
-                if(i == 288){
+                //if(i == 290){
+                //    ConstantUtf8Info uInfo = (ConstantUtf8Info)infos[i];
+                //    //uInfo.setBytes("booleanValue==false".getBytes());
+                //    //uInfo.setString("booleanValue==false||true.toString");
+                //    uInfo.setString("booleanValue()|| Boolean.valueOf(true)||Boolean.valueOf(true).toString");
+                //    infos[i]=uInfo;
+                //}
+                if(i == 161){
                     ConstantUtf8Info uInfo = (ConstantUtf8Info)infos[i];
-                    uInfo.setBytes("true".getBytes());
+                    //uInfo.setBytes("booleanValue==false".getBytes());
+                    //uInfo.setString("booleanValue==false||true.toString");
+                    uInfo.setString("破解你麻痹");
                     infos[i]=uInfo;
                 }
+                Boolean a = true;
+                String s = a.toString();
+                boolean b = a.booleanValue();
+
+                //if(i == 6){
+                //    ConstantUtf8Info uInfo = (ConstantUtf8Info)infos[i];
+                //    //uInfo.setBytes("java/lang/Boolean.booleanValue==false".getBytes());
+                //    uInfo.setString("java/lang/Boolean.booleanValue==false");
+                //    infos[i]=uInfo;
+                //}
             }
         }
         cf.setConstantPool(infos);

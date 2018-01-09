@@ -17,7 +17,9 @@ public class UuIdTest {
         //forTest();
         //stringTest();
         //calc(15436,1000);
-        sw("orderNotify");
+        //sw("orderNotify");
+        testVoid();
+        System.out.println("失败");
     }
 
     private static void stringTest() {
@@ -80,5 +82,11 @@ public class UuIdTest {
                 break;
             //throw new BusinessException("不符合的模版消息通知类型");
         }
+    }
+
+    private static void testVoid(){
+        System.out.println("中断");
+        return ;
+
     }
 }

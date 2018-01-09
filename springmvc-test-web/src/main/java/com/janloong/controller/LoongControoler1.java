@@ -60,7 +60,7 @@ public class LoongControoler1 {
         //int insert = userService.insert(user);
         logger.info("Logger info 打印成功吗");
         logger.debug("Logger debug 打印成功吗");
-        userService.updateAndInsert(user);
+        //userService.updateAndInsert(user);
         return "transaction test";
     }
 

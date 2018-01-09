@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class ScheduledJob {
     private static final Logger logger = LoggerFactory.getLogger(ScheduledJob.class);
 
-    @Scheduled(fixedRate=20000)
+    @Scheduled(fixedRate=10000)
     public void testJob() {
         //System.out.println("---------计划任务---------");
         logger.info("计划任务");
