@@ -1,24 +1,29 @@
 package com.janloong.boot.domain;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  * @author Janloong
  * @date 2017-10-21 10:05
  **/
+@Entity
 public class User {
+
+    @Id
+    private String userId;
+
     private String name;
     private String age;
-    private String address;
-    private String addres2s;
-    private String sex;
-    private Integer sex2;
-    private LocalDateTime localDateTime;
-    private BigDecimal bigDecimal;
-    private BigDecimal bigDecimal2;
-    private BigDecimal bigDecimal22;
 
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public String getName() {
         return name;
@@ -36,29 +41,13 @@ public class User {
         this.age = age;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
 
     @Override
     public String toString() {
         return "User{" +
-                "name='" + name + '\'' +
+                "userId='" + userId + '\'' +
+                ", name='" + name + '\'' +
                 ", age='" + age + '\'' +
-                ", address='" + address + '\'' +
-                ", sex='" + sex + '\'' +
                 '}';
     }
 }
