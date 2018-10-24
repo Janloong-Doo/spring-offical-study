@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: websocket-doo
+server:
+  servlet:
+    context-path: /chat

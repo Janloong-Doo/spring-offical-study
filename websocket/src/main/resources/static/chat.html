@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>趣味聊天室</title>
+    <style type="text/css">
+        *{margin: 0;padding: 0;}
+        a{text-decoration: none;}
+        ul,li{list-style: none;}
+        body{font-size: 14px;font-family: "微软雅黑";}
+        #dot{position: absolute;background:linear-gradient(130deg, #0d9cb8, #c918b2)}
+        .wrap{width: 700px;position: relative;top: 50px;left: calc(50% - 350px);display: flex;flex-direction: column;background: #F8F8F9;border-radius: 8px;user-select: none;-webkit-user-select: none;}
+
+        /* header */
+        .wrap .header{height: 80px;background: linear-gradient(200deg,#d6d1f1,#EE60E1);text-align: center;line-height: 80px;border-radius: 8px 8px 0 0;cursor: move;}
+        .wrap .header span{font-size: 28px;letter-spacing: 2px;color: #f1f1f1;}
+        .wrap .header #close_btn{position: absolute;right: 0px;top: 0px;width: 20px;height: 20px;background: url(img/close.png) no-repeat center;border-radius: 8px;}
+        /* header */
+
+        /* main */
+        .wrap .main{display: flex;height: 300px;}
+
+        /* left */
+        .wrap .left{width: 260px;border-right: 1px solid #e1e1e1}
+        .wrap .time{height: 30px;text-align: center;line-height: 30px;}
+        .wrap .time .time_bg{width:20px;height:20px;display:inline-block;vertical-align: middle;cursor: pointer;}
+        .wrap .time span{font-size: 14px;vertical-align: middle;color: #4EA9E9;cursor: pointer;}
+        .wrap .left .left_people a{height: 25px;text-align: center;line-height: 25px;margin-top: 3px;display: block;}
+        /* left */
+
+        /* right */
+        .wrap .right{width: 700px;background: #f9f9f9;}
+        .wrap .right .right_record{height:260px;padding-bottom:10px;overflow:auto;}
+        .wrap .right .right_record .record_item{width: 600px;margin: 0 auto;}
+        .wrap .right .right_record .record_item p{text-align: center;font-size: 13px;color: #9A9797;}
+        .wrap .right .right_record .record_item .record_item_txt p{text-align: left;margin: 5px 0 0 10px;}
+        .wrap .right .right_record .record_item .record_item_txt .avatar{margin-left: 5px;color: #AC4BFD;font-size: 12px;}
+		.wrap .right .right_record .record_item .record_item_txt .txt{color: #f1f1f1;}
+        .wrap .right .right_record .record_item .record_item_txt p span{border-radius: 10px;text-align: left;background: skyblue;padding: 3px 5px;font-size: 14px;color: #E833F6;}
+        /* right */
+
+
+        /* content bottom */
+        .wrap .content{height: 140px;border-top: 1px solid #e1e1e1;display: flex;flex-direction: column;}
+        .wrap .content .content_tool{height: 30px;border-bottom: 1px solid #e1e1e1;display: flex;line-height: 41px;}
+        .wrap .content .content_tool div{margin-left: 20px;}
+        .wrap .content .content_tool .bg{width: 20px;height: 20px;display: inline-block;cursor: pointer;}
+
+
+        .wrap .content .content_text{height: 90px;padding: 5px;outline: none;}
+        .wrap .content .content_btn{display: flex;justify-content: space-between;line-height: 30px;border-top: 1px solid #e1e1e1;}
+        .wrap .content .content_btn .content_btn_text{font-size: 12px;letter-spacing: 1px;line-height: 35px;color: #7E7D7D;margin-left: 10px;}
+        .wrap .content .content_btn .btns{width:140px;display: flex;margin-top: 2px;}
+        .wrap .content .btn_item{width: 80px;height:25px;text-align: center; line-height: 25px;border: 1px solid #c1c1c1;color: #313333;cursor: pointer;margin-right: 5px;letter-spacing: 1px;border-radius: 4px;}
+        /* content bottom */
+    </style>
+</head>
+<body>
+    <canvas id="dot"></canvas>
+    <div class="wrap">
+        <div class="header">
+            <span>趣味聊天室</span>
+            <a href="javascript:void(0)" id="close_btn"></a>
+        </div>
+        <div class="main">
+            <!-- left -->
+            
+            <!-- right -->
+            <div class="right">
+                <div class="time">
+                    <i class="time_bg" style="background: url(img/clock.png) no-repeat;"></i>
+                    <span>聊天记录</span>
+                </div>
+                <!-- 聊天记录 -->
+                <div class="right_record" id= "outputMessage">
+                	 
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- content tool/txt -->
+        <div class="content">
+            <div class="content_tool">
+                <div class="tool_font"><i class="bg" style="background: url(img/font.png) no-repeat;"></i></div>
+                <div class="tool_emjo"><i class="bg" style="background: url(img/emjo.png) no-repeat;"></i></div>
+
+            </div>
+            <div class="content_text" contenteditable="true" id="inputMessage">
+            </div>
+
+            <div class="content_btn">
+                <div class="content_btn_text"><i>自己DIY的聊天室</i></div>
+
+                <div class="btns">
+                    <div class="send btn_item" onclick = "getMessage();">
+                        <span>发送</span><span>(S)</span>
+                    </div>
+                    <div class="close btn_item">
+                        <span>关闭</span><span>(C)</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>-->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <script src="js/dot.js"></script>
+    <script type="text/javascript">
+        Dot("dot", {
+            cW:window.innerWidth,
+            cH:window.innerHeight,
+            dotColor:'#DE0D59'
+        });
+ 	
+       // websocket实现聊天,客户端需要做的事情,总结起来,其实就是如下几件
+       // 1 :获取连接  new WebSocket()
+       //
+       //
+       //
+       //
+       //
+       
+       //服务端地址和请求类型
+       var wsUrl = "ws://localhost:8080/chat/chatRoomServer";
+       //客户端与服务端建立连接 ，建立连接以后，他会出发一个ws.onopen事件
+       var ws = new WebSocket(wsUrl);
+       
+       //连接成功后 ，提示浏览器客户端输入昵称
+       ws.onopen= function(){
+    	   var userName = prompt("请给自己取一个名字 : ");
+    	   ws.send(userName);
+       }
+       
+       //客户端收到服务器发送的消息 
+       ws.onmessage = function(message){
+    	   //alert(message.data);
+    	   //message.data
+    	   //获取以后，在客户端显示
+    	   outputMessage.innerHTML=outputMessage.innerHTML+ message.data;
+    	   
+    	   var msg = document.getElementById("outputMessage");
+    	   //差值 溢出的高度减掉可视的高度
+    	   var distance  = msg.scrollHeight -msg.offsetHeight;
+    	   //将差值赋给滚动条的高度
+    	   msg.scrollTop = distance;
+       }
+       
+       //获取某个用户输入的聊天内容，并发送服务端，让服务端广播给所有人
+       function getMessage(){
+    	   var inputMessage = document.getElementById("inputMessage").innerText;
+    	   //alert(inputMessage);
+    	   if(typeof(inputMessage)=="undefined"){
+    		  alert("请输入您要发送的消息");
+    	   }else{
+    	   	//获取消息以后，要发送给服务端，然后广播给所有用户
+    	   	ws.send(inputMessage);
+    	   	document.getElementById("inputMessage").innerText="";
+    	   	}
+    	   
+       }
+       
+       //当关闭页面或者用户退出时,会执行一个ws.close()方法 
+       window.onbeforeunload = function(){
+    	   ws.close();
+       }
+       
+       document.onkeyup = function(e){
+    	   if(e.keyCode==13){
+    		   getMessage();  
+    	   }
+    	   
+       }
+        
+    </script>
+</body>
+</html>
